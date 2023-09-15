@@ -1,0 +1,389 @@
+---
+title: "cancerVSdebtCanada"
+output: html_document
+date: "2023-03-18"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+cancerDebt_Canada <- read_csv("/...file-path-to..../cancerdebtcanadaNoQuebec.csv")
+View(cancerDebt_Canada)
+```
+
+```{r}
+head(cancerDebt_Canada)
+#
+#rename csv variable names
+#
+names(cancerDebt_Canada) <- c("Year", "CancerRate", "CreditMarket", "ConsumerCredit", "breast", "esophagus", "lungBronchus", "colorectal","maleCancer","femaleCancer")
+head(cancerDebt_Canada)
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$CancerRate,
+     ylim=c(400, 580),
+     main="Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+CancerYearCanada_fit = lm(cancerDebt_Canada$CancerRate ~ cancerDebt_Canada$Year)
+summary(CancerYearCanada_fit)
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$CancerRate,
+     ylim=c(400, 580),
+     abline(CancerYearCanada_fit),
+     main="Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+breastYearCanada_fit = lm(cancerDebt_Canada$breast ~ cancerDebt_Canada$Year)
+summary(CancerYearCanada_fit)
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$breast,
+     ylim=c(100, 150),
+     abline(breastYearCanada_fit),
+     main="Breast Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Breast Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+esophagusYearCanada_fit = lm(cancerDebt_Canada$esophagus ~ cancerDebt_Canada$Year)
+summary(CancerYearCanada_fit)
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$esophagus,
+     ylim=c(0, 10),
+     abline(esophagusYearCanada_fit),
+     main="Esophagus Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Esophagus Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+lungBronchusYearCanada_fit = lm(cancerDebt_Canada$lungBronchus ~ cancerDebt_Canada$Year)
+summary(lungBronchusYearCanada_fit)
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$lungBronchus,
+     ylim=c(55, 75),
+     abline(lungBronchusYearCanada_fit),
+     main="Lung and Bronchus Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Lung and Bronchus Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+coloRectalYearCanada_fit = lm(cancerDebt_Canada$colorectal~ cancerDebt_Canada$Year)
+summary(coloRectalYearCanada_fit)
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$colorectal,
+     ylim=c(52, 67),
+     abline(coloRectalYearCanada_fit),
+     main="Colon and Rectal Cancer Incidence Rate per 100,000 population VS Year in Canada", 
+     xlab="Year",
+     ylab="Colon and Rectal Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$CreditMarket,
+     ylim=c(100, 200),
+     main="Credit market debt to disposable income (Q4 values) VS Year in Canada", 
+     xlab="Year",
+     ylab="Credit market debt to disposable income (Q4 values)")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+creditMarketCanada_fit = lm(cancerDebt_Canada$CreditMarket ~ cancerDebt_Canada$Year)
+summary(creditMarketCanada_fit)
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$CreditMarket,
+     ylim=c(100, 200),
+     abline(creditMarketCanada_fit),
+     main="Credit market debt to disposable income (Q4 values) VS Year in Canada", 
+     xlab="Year",
+     ylab="Credit market debt to disposable income (Q4 values)")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$ConsumerCredit,
+     ylim=c(100, 200),
+     main="Consumer credit and mortgage liabilities to disposable income (Q4 values) VS Year in Canada", 
+     xlab="Year",
+     ylab="Consumer credit and mortgage liabilities to disposable income (Q4 values)")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+
+```{r}
+#
+# obtain a linear model 
+# -- recal y first for obtaining the model
+# -- recall the tilde ~ between 
+# 
+ConsumerCreditCanada_fit = lm(cancerDebt_Canada$ConsumerCredit ~ cancerDebt_Canada$Year)
+summary(ConsumerCreditCanada_fit)
+```
+
+```{r}
+#
+#plot the year as the x axis
+#
+plot(cancerDebt_Canada$Year, cancerDebt_Canada$ConsumerCredit,
+     ylim=c(100, 200),
+     abline(ConsumerCreditCanada_fit),
+     main="Consumer credit and mortgage liabilities to disposable income (Q4 values) VS Year in Canada", 
+     xlab="Year",
+     ylab="Consumer credit and mortgage liabilities to disposable income (Q4 values)")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     # add a vertical line at x = 2008
+     abline(v=2008, col="red")
+```
+
+```{r}
+#The Pearson correlation coefficient (r) is the most common way of measuring a linear correlation. It is a number between –1 and 1 that measures the strength and direction of the relationship between two variables. When one variable changes, the other variable changes in the same direction.
+
+#strong relationship between Consumer credit and mortgage liabilities to disposable income and cancer incidence 
+cor(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate)
+#strong relationship between Credit market debt to disposable income and cancer incidence 
+cor(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate)
+```
+
+```{r}
+plot(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate)
+```
+```{r}
+plot(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate)
+```
+
+```{r}
+#create a simple linear regression model for consumer credit vs cancer rate
+cancerConsumer_Model <- lm(CancerRate ~ ConsumerCredit, data=cancerDebt_Canada)
+cancerConsumer_Model
+#
+# Linear model: y = 224.22 + (1.87 * x)
+confint(cancerConsumer_Model, level = 0.95)
+```
+
+```{r}
+#create a simple linear regression model for consumer credit vs cancer rate
+cancerCredit_Model <- lm(CancerRate ~ CreditMarket, data=cancerDebt_Canada)
+cancerCredit_Model
+#
+# Linear model: y = 220.695  + (1.796  * x)
+confint(cancerCredit_Model, level = 0.95)
+```
+
+
+```{r}
+     plot(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate,
+     xlim=c(110,190),
+     ylim=c(420, 570),
+     abline(cancerConsumer_Model),
+     main="Consumer credit and mortgage liabilities to disposable income (Q4 values) VS Cancer Incidence Rate in Canada", 
+     xlab="Consumer credit and mortgage liabilities to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+```{r}
+     plot(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate,
+     xlim=c(110,190),
+     ylim=c(420, 580),
+     abline(cancerCredit_Model),
+     main="Credit market debt to disposable income (Q4 values) VS Cancer Incidence Rate in Canada", 
+     xlab="Credit market debt to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+
+```{r}
+     plot(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate,
+     xlim=c(110,190),
+     ylim=c(420, 570),
+     abline(cancerConsumer_Model),
+     main="Consumer credit and mortgage liabilities to disposable income (Q4 values) VS Cancer Incidence Rate in Canada", 
+     xlab="Consumer credit and mortgage liabilities to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     #add labels to every point
+     text(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate-10, labels=cancerDebt_Canada$Year, cex=0.7)
+```
+
+```{r}
+     plot(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate,
+     xlim=c(110,190),
+     ylim=c(420, 580),
+     abline(cancerCredit_Model),
+     main="Credit market debt to disposable income (Q4 values) VS Cancer Incidence Rate in Canada", 
+     xlab="Credit market debt to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+     axis(1, at = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+     #add labels to every point
+     text(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate-10, labels=cancerDebt_Canada$Year, cex=0.7)
+```
+```{r}
+# Calculate a 95% confidence interval
+conf.int <- predict(cancerCredit_Model, interval = "confidence", level = 0.95)
+plot(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate,
+     xlim=c(115,185),
+     ylim=c(420, 560),
+     abline(cancerCredit_Model),
+     main="95% confidence interval for simple linear regression model", 
+     xlab="Credit-Market Debt to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+    lines(cancerDebt_Canada$CreditMarket, conf.int[, 2], col = "red", lty = "dashed")
+    lines(cancerDebt_Canada$CreditMarket, conf.int[, 3], col = "blue", lty = "dashed")
+    #add labels to every point
+    text(cancerDebt_Canada$CreditMarket, cancerDebt_Canada$CancerRate-10, labels=cancerDebt_Canada$Year, cex=0.7)
+    # Add a legend to the plot
+    legend("topleft", legend = c("Regression Line", "Upper Confidence Bound", "Lower Confidence Bound"), lty= c("solid", "dashed","dashed"), col = c("black", "blue","red"), cex=0.5)
+```
+
+
+```{r}
+#lets get a summary of the linear regression model
+# 
+# for now, i am interested in the P-Value
+#  What Is P-Value?
+#In statistics, the p-value is the probability of obtaining results at least as extreme as the observed results of a statistical hypothesis test, assuming that the null hypothesis is correct. The p-value serves as an alternative to rejection points to provide the smallest level of significance at which the null hypothesis would be rejected. A smaller p-value means that there is stronger evidence in favor of the alternative hypothesis. 
+# the P-Value is 1.45e-10 which is significantly smaller than 0.05 threshold.
+#
+# A p-value less than 0.05 is typically considered to be statistically significant, in which case the null hypothesis should be rejected. A p-value greater than 0.05 means that deviation from the null hypothesis is not statistically significant, and the null hypothesis is not rejected
+#
+#A p-value of 1.45e-10 indicates that if the null hypothesis tested were indeed true, then there would be a one-in-14500000000 chance of observing results at least as extreme. This leads the observer to reject the null hypothesis because either a highly rare data result has been observed or the null hypothesis is incorrect.
+summary(cancerConsumer_Model)
+```
+```{r}
+summary(cancerCredit_Model)
+```
+
+```{r}
+# Calculate a 95% confidence interval
+conf.int <- predict(cancerConsumer_Model, interval = "confidence", level = 0.95)
+plot(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate,
+     xlim=c(115,185),
+     ylim=c(420, 560),
+     abline(cancerConsumer_Model),
+     main="95% confidence interval for simple linear regression model", 
+     xlab="Consumer credit and mortgage liabilities to disposable income (Q4 values)",
+     ylab="Cancer Incidence Rate per 100,000 population")
+    lines(cancerDebt_Canada$ConsumerCredit, conf.int[, 2], col = "red", lty = "dashed")
+    lines(cancerDebt_Canada$ConsumerCredit, conf.int[, 3], col = "blue", lty = "dashed")
+    #add labels to every point
+    text(cancerDebt_Canada$ConsumerCredit, cancerDebt_Canada$CancerRate-10, labels=cancerDebt_Canada$Year, cex=0.7)
+    # Add a legend to the plot
+    legend("topleft", legend = c("Regression Line", "Upper Confidence Bound", "Lower Confidence Bound"), lty= c("solid", "dashed","dashed"), col = c("black", "blue","red"))
+```
+
+
+```{r}
+predict(cancerConsumer_Model)
+```
+
+```{r}
+#
+# Linear model: y = 224.22 + (1.87 * x)
+# what would happen to cancer incidence rate if i increased consumer credit to 200 points (ratio of 200, or 200%)?
+# result shows that if we increased consumerCredit variable to 200 then the cancer incidence rate would increase to 598.1306 (per 100000 population)
+predict(cancerConsumer_Model, data.frame(ConsumerCredit = 200))
+```
+
+```{r}
+#
+# what would happen to cancer incidence rate if i increased consumer credit to 180, 190 and 200 points (ratio / %)?
+# result shows that if we increased consumerCredit variable to 180,190,and 200 successively then the cancer incidence rate would increase to 560.7394 579.4350 598.1306 successively (per 100000 population)
+rangeCancerRate <- data.frame(ConsumerCredit <-c(180,190,200))
+predict(cancerConsumer_Model, rangeCancerRate)
+```
+
+```{r}
+head(cancerDebt_Canada)
+ggplot(data=cancerDebt_Canada, aes(x = cancerDebt_Canada$Year, y = "Cancer Incidence per 100000 population")) + 
+  geom_line(aes(y=cancerDebt_Canada$esophagus),color="blue") +
+  geom_line(aes(y=cancerDebt_Canada$breast),color="black") +
+  geom_line(aes(y=cancerDebt_Canada$lungBronchus),color="red") +
+  geom_line(aes(y=cancerDebt_Canada$colorectal),color="orange") +
+  labs(title="Multiple Line Graph of Different Catagories of Cancer Incidence VS Year", x="Year", y="Cancer Incidence") 
+```

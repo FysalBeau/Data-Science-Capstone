@@ -1,0 +1,45 @@
+---
+title: "mlr.Rmd"
+output: html_document
+date: "2023-04-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+debtStress_Canada <- read_csv("/....file-path..../cancerdebtstresscanadaNoQuebec.csv")
+View(debtStress_Canada)
+```
+
+```{r}
+head(debtStress_Canada)
+#
+#rename csv variable names
+#
+names(debtStress_Canada) <- c("Year", "CancerRate", "PerceivedStress12Over","Mortgages-dbs")
+debtStress_Canada
+```
+
+```{r}
+debtStress.df = debtStress_Canada[, c("CancerRate", "Mortgages-dbs", "PerceivedStress12Over")]
+debtStress.df
+plot(debtStress.df)
+```
+
+```{r}
+debtStress.model <- lm(debtStress_Canada$CancerRate ~ debtStress_Canada$`Mortgages-dbs` + debtStress_Canada$PerceivedStress12Over, data = debtStress_Canada )
+debtStress.model
+```
+
+```{r}
+summary(debtStress.model)
+```
+
+```{r}
+# Create diagnostic plots of the model
+par(mfrow = c(2, 2))  # Set up a 2x2 grid of plots
+plot(debtStress.model)
+```

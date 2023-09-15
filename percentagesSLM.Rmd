@@ -1,0 +1,68 @@
+---
+title: "percentagesSLM"
+output: html_document
+date: "2023-03-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+cancerDebt_Canada <- read_csv("/....file-path..../cancerdebtcanadaNoQuebec.csv")
+View(cancerDebt_Canada)
+```
+
+```{r}
+head(cancerDebt_Canada)
+#
+#rename csv variable names
+#
+names(cancerDebt_Canada) <- c("Year", "CancerRate", "CreditMarket", "ConsumerCredit", "breast", "esophagus", "lungBronchus", "colorectal")
+head(cancerDebt_Canada)
+```
+
+```{r}
+#install.packages('dplyr')
+#library(dbplyr)
+#remove.packages('dplyr')
+#install.packages('dplyr')
+#
+# calculate percentage increase
+cancerDebt_Canada <- cancerDebt_Canada %>% 
+  mutate(perc_cancer = (cancerDebt_Canada$CancerRate - lag(cancerDebt_Canada$CancerRate))/lag(cancerDebt_Canada$CancerRate) * 100)
+# print result
+cancerDebt_Canada
+```
+
+
+```{r}
+#change the value of the 1st index in perc_increase column
+cancerDebt_Canada[1,9] = 0
+cancerDebt_Canada
+```
+
+
+```{r}
+ggplot(data=cancerDebt_Canada, aes(x = Year, y = "Percentage Change (%)")) + 
+  geom_line(aes(y=perc_cancer),color="blue") +
+  labs(title="Line Graph of Percentage Change for Cancer Incidence VS Year", x="Year", y="Percentage Change (%)") +
+  scale_x_continuous(breaks = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
+
+```{r}
+# calculate percentage increase
+cancerDebt_Canada <- cancerDebt_Canada %>% 
+  mutate(perc_consumer = (cancerDebt_Canada$ConsumerCredit - lag(cancerDebt_Canada$ConsumerCredit))/lag(cancerDebt_Canada$ConsumerCredit) * 100)
+#change the value of the 1st index in perc_increase column
+cancerDebt_Canada[1,10] = 0
+cancerDebt_Canada
+```
+
+```{r}
+ggplot(data=cancerDebt_Canada, aes(x = Year, y = "Percentage Change (%)")) + 
+  geom_line(aes(y=perc_consumer),color="blue") +
+  labs(title="Line Graph of Percentage Change for Consumer Credit Debt VS Year", x="Year", y="Percentage Change (%)") +
+  scale_x_continuous(breaks = seq(min(cancerDebt_Canada$Year), max(cancerDebt_Canada$Year), by = 1))
+```
