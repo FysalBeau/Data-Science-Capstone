@@ -13,5 +13,5 @@ Download all files in repo<br>
 <br>
 <h4>Step 2:</h4>
 Update the <b>read_csv()</b> filepath with the file path of the appropriate .csv file located locally on your computer.<br>
-![File Path Example Photo](https://github.com/FysalBeau/Data-Science-Capstone/raw/main/set-up-file-path.png)
+![File Path Example Photo](https://raw.githubusercontent.com/FysalBeau/Data-Science-Capstone/main/set-up-file-path.png)
 
